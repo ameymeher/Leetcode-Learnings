@@ -42,8 +42,10 @@ class Trie:
     def remove(self,word):
         def remove_word(word,curr_trie):
             if word == '':
-                del curr_trie['*']
-                return not curr_trie
+                if '*' in curr_trie:
+                    del curr_trie['*']
+                    return not curr_trie
+                return False
             elif word[0] not in curr_trie:
                 return False
             else:
