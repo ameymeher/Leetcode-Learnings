@@ -2,6 +2,7 @@
 # 1. BFS can be used to find the longest path in a tree from leaf to leaf in the case when we are not given the root of the tree.
 # 2. For this case, we have to do BFS twice, once from an arbitrary node to find the farthest node.
 # 3. Then we have to do BFS from the farthest node to find the longest path.
+# 4. IMP: This only works if it is a tree, not on graphs with cycles.
 
 # An example case
 nodes = 7
