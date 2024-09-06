@@ -1,5 +1,6 @@
 class Trie:
 
+    # Initialize data structure
     def __init__(self,**kwargs):
         self.trie = {}
         words = kwargs.get('words',None)
@@ -7,7 +8,7 @@ class Trie:
             for word in words:
                 self.insert(word)
 
-    # Insert a word into the trie.
+    # Insert a word into the trie
     def insert(self, word: str) -> None:
         curr_trie = self.trie
         for i,c in enumerate(word):
@@ -16,7 +17,7 @@ class Trie:
             curr_trie = curr_trie[c]
         curr_trie['*'] = '*' 
 
-    # Returns if the word is in the trie.
+    # Returns if the word is in the trie
     def search(self, word: str) -> bool:
         curr_trie = self.trie
         for c in word:
@@ -28,7 +29,7 @@ class Trie:
             return True
         return False
 
-    # Returns if there is any word in the trie that starts with the given prefix.
+    # Returns if there is any word in the trie that starts with the given prefix
     def startsWith(self, prefix: str) -> bool:
         curr_trie = self.trie
         for c in prefix:
@@ -54,8 +55,36 @@ class Trie:
                     return True
                 return False
         remove_word(word,self.trie)
-                    
+
+    # Returns the first n suggestions for a given prefix
+    def first_n_suggestions(self,prefix,n):
+        sgn = []
+
+        # Go to the node which is at the end of the prefix
+        curr_trie = self.trie
+        for c in prefix:
+            if c not in curr_trie:
+                return sgn
+            curr_trie = curr_trie[c]
+
+        # Do DFS in a particular order till you get n answers
+        def dfs(curr_trie,curr_word):
+            nonlocal sgn,n
+
+            if '*' in curr_trie:
+                sgn.append(curr_word)
+
+            for key in sorted(curr_trie):
+                if len(sgn) == n:
+                    return
+                if key != '*':
+                    dfs(curr_trie[key],curr_word + key)
+
+        dfs(curr_trie,prefix)
+
+        return sgn
         
+    # Returns the trie
     def __repr__(self):
         return str(self.trie)
     
@@ -66,6 +95,9 @@ words = ['hello','world','he','hell','']
 trie = Trie(words=words)
 
 print("Trie: ",trie)
+print()
+
+print("3 suggestions for prefix he: ",trie.first_n_suggestions('he',3))
 print()
 
 print("Removing help from trie")
