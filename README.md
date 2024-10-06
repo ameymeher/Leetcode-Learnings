@@ -1,5 +1,6 @@
 # Leetcode-Learnings
-Essential learning from Leetcode problems
+
+## My mistakes and learnings
 
 | # | Summary | Comments | References |
 |---|---------|----------|------------|
@@ -14,3 +15,10 @@ Essential learning from Leetcode problems
 | 9 | Truncate division towards zero <br> use int(a/b) <br> // and math.floor truncates towards - infinity | - I used math.floor here, but -1.5 truncates to -2. I wanted -1. <br> - For this, use int(a/b) or math.trunc(a/b) | [Basic Calculator II](./String%20Manipulations/Basic%20Calculator%20II.py)
 | 10 | While dealing with reverse expressions, remember to reverse the numbers that are formed <br> Take comprehensive test cases, forgot to take 2 digit numbers | - For this problem, I reversed the expression <br> - After forming the numbers, I was directly appeding it, forgot to reverse the number formed <br> - Always take good test cases, forgot to consider two digit numbers | [Basic Calculator](./String%20Manipulations/Basic%20Calculator.py)
 | 11 | Recursive solution is top down, iterative solution is bottom up, atleast in this case | - I solved it using a recursive approach <br> - The iterative approach is also so simple using a stack and starting from the bottom up | [Evaluate Reverse Polish Notation](./String%20Manipulations/Evaluate%20Reverse%20Polish%20Notation.py)
+
+
+## Patterns in problems you just need to know
+
+| # | Summary | Comments | References |
+|---|---------|----------|------------|
+| 1 | Getting the next permutation of a string | - Start from the back of the string to get the char which is not in increasing order <br> - Find the character to the right of it which is just greater than that character <br> - Swap these two <br> - Reverse all the characters after the char we just found not in increasing order to start from the start | [Next Permutation](./String%20Manipulations/Next%20Permutation.py)
