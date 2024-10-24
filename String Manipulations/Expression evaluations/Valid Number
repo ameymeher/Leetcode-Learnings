@@ -1,0 +1,74 @@
+"""
+1. Good problem for test cases generation
+2. Very ambiguous problem statement, tested based on the test cases suggested
+"""
+
+
+class Solution:
+    def isNumber(self, s: str) -> bool:
+
+        digit = False
+        decimal = False
+        exponent = False
+
+        i = 0
+
+        # For the signs
+        if s[i] in set('+-'):
+            i+=1
+        
+        while i < len(s):
+
+            if s[i].isdigit():
+                i+=1
+                digit = True
+
+            elif s[i] == '.':
+                if decimal:
+                    return False
+
+                decimal = True
+                i+=1
+                
+            elif s[i] in set('eE'):
+                if not digit:
+                    return False
+
+                if exponent:
+                    return False
+
+                exponent = True
+                i+=1
+
+                if i < len(s) and s[i] in set('+-'):
+                    i+=1
+
+                decimal=True
+                digit=False
+                
+            else:
+                return False
+            
+        return digit
+
+            
+
+    
+"""
++1
++1.2
++1.2e1
++1.2E1
+0089
++1.2e1.1 False
+-1.2
+e1 False
+. False
+.9
+4.
+-+ False
++e False
++.e False
+1.1.1
+xfghj
+"""

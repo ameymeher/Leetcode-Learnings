@@ -17,6 +17,34 @@ You must write an algorithm with O(log n) runtime complexity.
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         
+        def bisect_left(arr,val,key):
+            l = 0
+            r = len(arr)-1
+            mid = (l+r)//2
+
+            while l < r:
+                if val <= key(arr[mid]):
+                    r = mid
+                else:
+                    l = mid+1
+                mid = (l+r)//2
+            
+            return l
+        
+        def bisect_right(arr,val,key):
+            l = 0
+            r = len(arr)-1
+            mid = (l+r+1)//2
+
+            while l < r:
+                if val < key(arr[mid]):
+                    r = mid-1
+                else:
+                    l = mid
+                mid = (l+r+1)//2
+            
+            return l
+        
         def find_left(val):
             nonlocal nums
 
