@@ -16,6 +16,9 @@ The replacement must be in place and use only constant extra memory.
 3. We need to find the number that is just greater than that number on the right side.
 4. Swap the two numbers.
 5. Reverse the numbers from the next index of the first number that we found, to set the numbers in increasing order.
+
+1. Don't forget to handle the case of 3,2,1 where small won't be found
+2. Initiate large to len(nums), if a large is not found, then use the last element
 """
 
 class Solution:
@@ -24,21 +27,28 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         
-        x_i = len(nums)-1
+        small = None
+
+        # 24765332
+        # 24723356
 
         for i in range(len(nums)-2,-1,-1):
             if nums[i] < nums[i+1]:
-                x_i = i
+                small = i
                 break
 
-        if x_i == len(nums)-1:
-            nums[:] = nums[::-1] 
+        if small is None:
+            nums[:] = nums[::-1]
             return
-        else:
-            y_i = x_i + 1
-            while y_i < len(nums) and nums[y_i] > nums[x_i]:
-                y_i+=1
-            y_i-=1
 
-            nums[x_i], nums[y_i] = nums[y_i], nums[x_i]
-            nums[x_i+1:] = nums[-1:x_i:-1]
+        large = len(nums)
+
+        for i in range(small+1,len(nums)):
+            if nums[i] <= nums[small]:
+                large = i
+                break
+
+        large-=1
+
+        nums[small], nums[large] = nums[large], nums[small]
+        nums[small+1:] = nums[len(nums)-1:small:-1]

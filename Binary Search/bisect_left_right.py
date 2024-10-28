@@ -17,23 +17,24 @@ You must write an algorithm with O(log n) runtime complexity.
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         
+        # The range of output is [0,len(arr)]
         def bisect_left(arr,val,key):
             l = 0
-            r = len(arr)-1
-            mid = (l+r)//2
+            r = len(arr)
 
             while l < r:
+                mid = (l+r)//2
                 if val <= key(arr[mid]):
                     r = mid
                 else:
                     l = mid+1
-                mid = (l+r)//2
             
             return l
         
+        # The range of output is [0,len(arr)]
         def bisect_right(arr,val,key):
             l = 0
-            r = len(arr)-1
+            r = len(arr)
             mid = (l+r+1)//2
 
             while l < r:

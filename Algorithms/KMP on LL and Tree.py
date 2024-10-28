@@ -68,9 +68,6 @@ class Solution:
             return check(root.left,i) or check(root.right,i)
             
         lps,arr = build_lps(head)
-
-        for i in arr:
-            print(i.val)
         
         return check(root,0)
 
