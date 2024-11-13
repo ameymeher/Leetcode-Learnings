@@ -39,9 +39,7 @@ class Solution:
             else:
                 break
 
-        if ((max_prefix_length + max_suffix_length >= len(s_arr)) or 
-                max_prefix_length >= len(s_arr) or
-                max_suffix_length >= len(s_arr)):
+        if max_prefix_length + max_suffix_length >= len(s_arr):
             return True
 
         return False
